@@ -2,12 +2,13 @@
 
 require "test_helper"
 
-class TestTimeSeriesData < Minitest::Test
-  def test_that_it_has_a_version_number
-    refute_nil ::TimeSeriesData::VERSION
-  end
 
-  def test_it_does_something_useful
-    assert false
+describe TimeSeriesData do
+  it "does what README.md says" do
+    data_ary = Array.new(10) { |i| [i, Math.sin(i) + i] }
+    tsd = data_ary.to_timeseries
+    assert_in_epsilon(0.9207354924039483, tsd.interpolate(0.5))
+    assert_nil(tsd.interpolate(-1))
+    assert_in_epsilon(0.0, tsd.interpolate(-1, extrapolate: true))
   end
 end

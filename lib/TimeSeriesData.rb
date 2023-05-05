@@ -30,6 +30,12 @@ module TimeSeriesData
       x1, y1 = self[index]
       y0 + (y1 - y0) * (time - x0) / (x1 - x0)
     end
+
+    def inspect
+      "#<TimeSeriesData::Array:#{object_id} range:#{time_range.inspect}>"
+    end
+
+    alias interpolate interp_at
   end
 end
 
